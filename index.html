@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>📚 Mundo de Historias Infantiles</title>
+  <style>
+    .card-libro {
+      display: inline-block;
+      width: 180px;
+      height: 130px;
+      background: linear-gradient(to bottom right, #0f0f0f, #1e1e1e);
+      border-radius: 12px;
+      margin: 10px;
+      padding: 10px;
+      color: rgb(157, 138, 242);
+      text-align: center;
+      font-family: 'Arial Rounded MT Bold', sans-serif;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      transition: transform 0.2s;
+      cursor: pointer;
+      overflow: hidden;
+    }
+
+    .card-libro:hover {
+      transform: scale(1.05);
+    }
+
+    .card-libro p {
+      margin: 0;
+      font-size: 0.9em;
+      color: #ccc;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    } 
+
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: linear-gradient(135deg, #ff8559, #ea7a76);
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #d0a86c;
+      padding: 20px;
+      text-align: center;
+      font-size: 2em;
+      color: white;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    nav {
+      background-color: #efa23d;
+      padding: 10px;
+      display: flex;
+      justify-content: space-around;
+    }
+    nav button {
+      background-color: #f4be4a;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1em;
+      cursor: pointer;
+      border-radius: 10px;
+      transition: background-color 0.3s;
+    }
+    nav button:hover {
+      background-color: #66edff;
+    }
+    section {
+      display: none;
+      padding: 20px;
+      background-color: #ffc88d;
+      border-radius: 20px;
+      margin: 20px;
+      border-color: #0f0f0f;
+      border-style: solid;
+      border-width: 2px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      color: #0f0f0f;
+    }
+    section.active {
+      display: block;
+      animation: fadeIn 1s;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .login-box, .register-box {
+  background-image: url("https://plus.unsplash.com/premium_photo-1668091148044-056cd744e64a?fm=jpg&q=60&w=3000&ixlib=rb-4.1.&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Y2llbG9zJTIwYWwlMjBhdGFyZGVjZXJ8ZW58MHx8MHx8fDA%3D"); /* Puedes usar tu propia URL o ruta */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 10vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  width: 300px;
+  margin: 0 auto;
+  color: rgb(0, 0, 0);
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+}
+    input {
+      width: 90%;
+      padding: 10px;
+      margin: 5px 0;
+      border-radius: 10px;
+      border: 1px solid #d77af8;
+    }
+    button {
+      padding: 10px 20px;
+      border-radius: 10px;
+      background-color: #a6cbff;
+      border: none;
+      cursor: pointer;
+    }
+#tituloAnimado {
+  overflow: hidden;
+  border-right: 0.15em solid white;
+  white-space: nowrap;
+  margin: 0 auto;
+  letter-spacing: 2px;
+  animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: white }
+}
+
+ 
+  </style>
+</head>
+<body>
+
+<!-- Login -->
+<section id="login" class="active">
+  <div class="login-box">
+    <h2>🔒 Iniciar Sesión</h2>
+    <input type="text" id="loginUser" placeholder="Usuario"><br>
+    <input type="password" id="loginPass" placeholder="Contraseña"><br>
+    <button onclick="login()">Entrar</button>
+    <p>¿No tienes cuenta? <span onclick="showSection('register')" style="color:blue;cursor:pointer;">Crear cuenta</span></p>
+  </div>
+</section>
+
+<!-- Registro -->
+<section id="register">
+  <div class="register-box">
+    <h2>📝 Crear Cuenta</h2>
+    <input type="text" id="newUser" placeholder="Nuevo Usuario"><br>
+    <input type="password" id="newPass" placeholder="Contraseña"><br>
+    <button onclick="register()">Registrar</button>
+    <p>¿Ya tienes cuenta? <span onclick="showSection('login')" style="color:blue;cursor:pointer;">Iniciar sesión</span></p>
+  </div>
+</section>
+
+<!-- Página Principal -->
+<section id="main">
+  <header id="tituloAnimado">📚 Mundo de Historias Infantiles</header>
+  <p style="text-align: center; color: white; font-size: 1.2em;">¡Bienvenido al mágico mundo de las historias infantiles! Aquí podrás crear, modificar y leer historias encantadoras.</p>
+
+  <nav>
+    <button onclick="showMainSection('historias')">Historias</button>
+    <button onclick="showMainSection('crear')">Crear Historia</button>
+    <button onclick="showMainSection('modificar')">Modificar Historia</button>
+    <button onclick="showMainSection('libros')">Libros de Lectura</button>
+    <button onclick="logout()">🚪 Cerrar Sesión</button>
+  </nav>
+
+ <section id="historias" class="mainSection active">
+  <h2>✨Historias</h2>
+ <div id="listaLibros" style="display: flex; flex-wrap: wrap; gap: 10px;"></div>
+    <div id="historias-lista">
+      <h3>Historias Guardadas</h3>
+      <div style="background: #fff8dc; padding: 10px; border-radius: 10px;">
+        <p>Aquí aparecerán las historias guardadas.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="historias" class="mainSection">
+    <h2>📖 Historias Guardadas</h2>
+    <div id="historias-lista"></div>  
+
+</section>
+
+
+  <section id="crear" class="mainSection">
+    <h2>📝 Crear Nueva Historia</h2>
+    <input type="text" id="titulo" placeholder="Título"><br>
+    <textarea id="contenido" placeholder="Escribe tu historia aquí..." rows="5" style="width:100%;"></textarea><br>
+    Imagen: <input type="file" id="imagen"><br>
+    Audio: <input type="file" id="audio"><br>
+    <button onclick="guardarHistoria()">💾 Guardar</button>
+  </section>
+
+  <section id="modificar" class="mainSection">
+    <h2>🔧 Modificar Historia</h2>
+    <p>En desarrollo...</p>
+  </section>
+
+  <section id="libros" class="mainSection">
+    <h2>📚 Libros de Lectura</h2>
+    <input type="text" id="libroTitulo" placeholder="Título del libro">
+    <input type="text" id="libroLink" placeholder="Enlace del libro">
+    <button onclick="agregarLibro()">➕ Agregar Libro</button>
+    <div id="listaLibros"></div>
+  </section>
+</section>
+
+<script>
+  function showSection(id) {
+    document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+  }
+
+  function showMainSection(id) {
+    document.querySelectorAll('.mainSection').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+  }
+
+  // Registro
+  function register() {
+    const user = document.getElementById('newUser').value;
+    const pass = document.getElementById('newPass').value;
+    if (user && pass) {
+      let users = JSON.parse(localStorage.getItem('usuarios')) || [];
+      if (users.find(u => u.user === user)) {
+        alert("Usuario ya existe.");
+      } else {
+        users.push({ user, pass });
+        localStorage.setItem('usuarios', JSON.stringify(users));
+        alert("Cuenta creada. Ahora inicia sesión.");
+        showSection('login');
+      }
+    } else {
+      alert("Por favor, completa todos los campos.");
+    }
+  }
+
+  // Login con persistencia
+  function login() {
+    const user = document.getElementById('loginUser').value;
+    const pass = document.getElementById('loginPass').value;
+    let users = JSON.parse(localStorage.getItem('usuarios')) || [];
+    if (users.find(u => u.user === user && u.pass === pass)) {
+      localStorage.setItem('usuarioActivo', user);  
+      showSection('main');
+      showMainSection('historias');
+    } else {
+      alert("Usuario o contraseña incorrectos.");
+    }
+  }
+
+  function logout() {
+    localStorage.removeItem('usuarioActivo');
+    showSection('login');
+  }
+
+  window.onload = function() {
+    if (localStorage.getItem('usuarioActivo')) {
+      showSection('main');
+      showMainSection('historias');
+    } else {
+      showSection('login');
+    }
+    mostrarLibros(); 
+  }
+
+  function guardarHistoria() {
+    const titulo = document.getElementById('titulo').value;
+    const contenido = document.getElementById('contenido').value;
+    const imagen = document.getElementById('imagen').files[0];
+    const audio = document.getElementById('audio').files[0];
+
+    let historiaHTML = `<h3>${titulo}</h3><p>${contenido}</p>`;
+    if (imagen) historiaHTML += `<img src="${URL.createObjectURL(imagen)}" style="max-width:200px;">`;
+    if (audio) historiaHTML += `<audio controls src="${URL.createObjectURL(audio)}"></audio>`;
+
+    const lista = document.getElementById('historias-lista');
+    const div = document.createElement('div');
+    div.innerHTML = historiaHTML;
+    div.style.background = "#fff8dc";
+    div.style.padding = "10px";
+    div.style.margin = "10px 0";
+    lista.appendChild(div);
+
+    alert("Historia guardada!");
+  }
+
+  function agregarLibro() {
+    const titulo = document.getElementById('libroTitulo').value;
+    const link = document.getElementById('libroLink').value;
+    if (titulo && link) {
+      const libros = JSON.parse(localStorage.getItem('libros')) || [];
+      libros.push({ titulo, link });
+      localStorage.setItem('libros', JSON.stringify(libros));
+      mostrarLibros();
+      document.getElementById('libroTitulo').value = '';
+      document.getElementById('libroLink').value = '';
+    } else {
+      alert("Completa el título y el enlace.");
+    }
+  }
+
+  function mostrarLibros() {
+    const lista = document.getElementById('listaLibros');
+    lista.innerHTML = '';
+    const libros = JSON.parse(localStorage.getItem('libros')) || [];
+    libros.forEach(libro => {
+      const div = document.createElement('div');
+      div.className = 'libro-link';
+      div.innerHTML = `<strong>${libro.titulo}</strong>: <a href="${libro.link}" target="_blank">${libro.link}</a>`;
+      lista.appendChild(div);
+    });
+  }
+</script>
+
+</body>
+</html>
